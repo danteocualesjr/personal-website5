@@ -5,13 +5,10 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
-  FileText,
   Download,
   Loader2,
-  Palette,
   Eye,
   PenLine,
-  Layers,
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,18 +26,18 @@ import { sampleResumeData } from "@/lib/sample-data";
 import { toast } from "sonner";
 
 const ACCENT_COLORS = [
-  "#6366f1",
-  "#8b5cf6",
-  "#a855f7",
-  "#ec4899",
-  "#ef4444",
-  "#f97316",
-  "#eab308",
-  "#22c55e",
-  "#14b8a6",
-  "#0ea5e9",
-  "#3b82f6",
-  "#374151",
+  "#171717",
+  "#57534e",
+  "#1e3a5f",
+  "#0d9488",
+  "#059669",
+  "#2563eb",
+  "#4f46e5",
+  "#7c3aed",
+  "#be185d",
+  "#dc2626",
+  "#ea580c",
+  "#ca8a04",
 ];
 
 export default function EditorPage() {
@@ -58,7 +55,7 @@ export default function EditorPage() {
 
   const [isDownloading, setIsDownloading] = useState(false);
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
-  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showColors, setShowColors] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -99,243 +96,171 @@ export default function EditorPage() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      toast.success("Resume downloaded!");
+      toast.success("Resume downloaded");
     } catch {
-      toast.error("Download failed. Please try again.");
+      toast.error("Download failed. Try again.");
     } finally {
       setIsDownloading(false);
     }
   };
 
   return (
-    <div className="flex h-screen flex-col bg-gray-50">
-      {/* Top Bar */}
-      <nav className="shrink-0 border-b border-gray-200/80 bg-white">
-        <div className="flex h-14 items-center justify-between px-4">
-          {/* Left */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="/templates"
-              className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Templates</span>
-            </Link>
-            <div className="h-5 w-px bg-gray-200" />
-            <div className="flex items-center gap-2">
-              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-indigo-500 to-purple-600">
-                <FileText className="h-3 w-3 text-white" />
-              </div>
-              <span className="text-sm font-semibold text-gray-900">Resume Editor</span>
-              <span className="hidden rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold text-indigo-600 sm:inline-block">
-                Step 3 of 3
-              </span>
-            </div>
-          </div>
-
-          {/* Right toolbar */}
-          <div className="flex items-center gap-2">
-            {/* Template Switcher */}
-            <div className="hidden items-center gap-1 rounded-lg border border-gray-200/80 bg-gray-50 p-0.5 sm:flex">
-              <Layers className="mx-1.5 h-3.5 w-3.5 text-gray-400" />
-              {TEMPLATES.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => {
-                    setSelectedTemplate(t.id);
-                    router.replace(`/editor/${t.id}`);
-                  }}
-                  className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                    selectedTemplate === t.id
-                      ? "bg-white text-gray-900 shadow-sm"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  {t.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile template select */}
-            <select
-              value={selectedTemplate}
-              onChange={(e) => {
-                const newId = e.target.value as TemplateId;
-                setSelectedTemplate(newId);
-                router.replace(`/editor/${newId}`);
-              }}
-              className="h-8 rounded-lg border border-gray-200 bg-white px-2 text-xs sm:hidden focus:outline-none focus:ring-2 focus:ring-indigo-100"
-            >
-              {TEMPLATES.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Color Picker */}
-            <div className="relative">
+    <div className="flex h-screen flex-col bg-white">
+      {/* Toolbar */}
+      <nav className="flex h-12 shrink-0 items-center justify-between border-b border-neutral-200 px-3">
+        {/* Left */}
+        <div className="flex items-center gap-2">
+          <Link
+            href="/templates"
+            className="flex items-center gap-1 rounded-md px-2 py-1 text-[12px] text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Back
+          </Link>
+          <div className="h-4 w-px bg-neutral-200" />
+          {/* Template pills */}
+          <div className="hidden items-center gap-0.5 sm:flex">
+            {TEMPLATES.map((t) => (
               <button
-                onClick={() => setShowColorPicker(!showColorPicker)}
-                className="flex h-8 items-center gap-1.5 rounded-lg border border-gray-200/80 bg-white px-2 text-xs text-gray-600 transition-colors hover:bg-gray-50"
+                key={t.id}
+                onClick={() => {
+                  setSelectedTemplate(t.id);
+                  router.replace(`/editor/${t.id}`);
+                }}
+                className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition-colors ${
+                  selectedTemplate === t.id
+                    ? "bg-neutral-900 text-white"
+                    : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+                }`}
               >
-                <div
-                  className="h-4 w-4 rounded-full ring-1 ring-inset ring-black/10"
-                  style={{ backgroundColor: accentColor }}
-                />
-                <Palette className="hidden h-3.5 w-3.5 text-gray-400 sm:block" />
+                {t.name}
               </button>
-              {showColorPicker && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setShowColorPicker(false)} />
-                  <div className="absolute right-0 top-full z-50 mt-2 rounded-xl border border-gray-200/80 bg-white p-3 shadow-xl animate-scale-in">
-                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-                      Accent Color
-                    </p>
-                    <div className="grid grid-cols-6 gap-1.5">
-                      {ACCENT_COLORS.map((color) => (
-                        <button
-                          key={color}
-                          onClick={() => {
-                            setAccentColor(color);
-                            setShowColorPicker(false);
-                          }}
-                          className={`flex h-7 w-7 items-center justify-center rounded-lg transition-all ${
-                            accentColor === color
-                              ? "scale-110 ring-2 ring-offset-1 ring-gray-400"
-                              : "hover:scale-110"
-                          }`}
-                          style={{ backgroundColor: color }}
-                        >
-                          {accentColor === color && (
-                            <Check className="h-3 w-3 text-white" strokeWidth={3} />
-                          )}
-                        </button>
-                      ))}
-                    </div>
+            ))}
+          </div>
+          {/* Mobile select */}
+          <select
+            value={selectedTemplate}
+            onChange={(e) => {
+              const v = e.target.value as TemplateId;
+              setSelectedTemplate(v);
+              router.replace(`/editor/${v}`);
+            }}
+            className="h-7 rounded-md border border-neutral-200 bg-white px-2 text-[12px] sm:hidden"
+          >
+            {TEMPLATES.map((t) => (
+              <option key={t.id} value={t.id}>{t.name}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Right */}
+        <div className="flex items-center gap-1.5">
+          {/* Color */}
+          <div className="relative">
+            <button
+              onClick={() => setShowColors(!showColors)}
+              className="flex h-7 items-center gap-1.5 rounded-md border border-neutral-200 px-2 text-[12px] text-neutral-500 hover:bg-neutral-50"
+            >
+              <div
+                className="h-3.5 w-3.5 rounded-full ring-1 ring-inset ring-black/10"
+                style={{ backgroundColor: accentColor }}
+              />
+              <span className="hidden sm:inline">Color</span>
+            </button>
+            {showColors && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setShowColors(false)} />
+                <div className="absolute right-0 top-full z-50 mt-1.5 rounded-lg border border-neutral-200 bg-white p-2.5 shadow-lg">
+                  <div className="grid grid-cols-6 gap-1">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        onClick={() => { setAccentColor(c); setShowColors(false); }}
+                        className={`flex h-6 w-6 items-center justify-center rounded-md transition-transform hover:scale-110 ${
+                          accentColor === c ? "ring-2 ring-neutral-900 ring-offset-1" : ""
+                        }`}
+                        style={{ backgroundColor: c }}
+                      >
+                        {accentColor === c && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
+                      </button>
+                    ))}
                   </div>
-                </>
-              )}
-            </div>
-
-            {/* Mobile Toggle */}
-            <div className="flex items-center rounded-lg border border-gray-200/80 bg-gray-50 p-0.5 sm:hidden">
-              <button
-                onClick={() => setMobileView("edit")}
-                className={`rounded-md px-2.5 py-1 transition-all ${
-                  mobileView === "edit"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-400"
-                }`}
-              >
-                <PenLine className="h-3.5 w-3.5" />
-              </button>
-              <button
-                onClick={() => setMobileView("preview")}
-                className={`rounded-md px-2.5 py-1 transition-all ${
-                  mobileView === "preview"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-400"
-                }`}
-              >
-                <Eye className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
-            {/* Download */}
-            <Button
-              size="sm"
-              className="gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-              onClick={handleDownload}
-              disabled={isDownloading}
-            >
-              {isDownloading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Download className="h-4 w-4" />
-              )}
-              <span className="hidden sm:inline">Download PDF</span>
-            </Button>
+                </div>
+              </>
+            )}
           </div>
+
+          {/* Mobile view toggle */}
+          <div className="flex items-center rounded-md border border-neutral-200 sm:hidden">
+            <button
+              onClick={() => setMobileView("edit")}
+              className={`rounded-l-md px-2 py-1 ${mobileView === "edit" ? "bg-neutral-900 text-white" : "text-neutral-400"}`}
+            >
+              <PenLine className="h-3.5 w-3.5" />
+            </button>
+            <button
+              onClick={() => setMobileView("preview")}
+              className={`rounded-r-md px-2 py-1 ${mobileView === "preview" ? "bg-neutral-900 text-white" : "text-neutral-400"}`}
+            >
+              <Eye className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          {/* Download */}
+          <Button
+            size="sm"
+            className="h-7 gap-1.5 rounded-md text-[12px]"
+            onClick={handleDownload}
+            disabled={isDownloading}
+          >
+            {isDownloading ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Download className="h-3.5 w-3.5" />
+            )}
+            <span className="hidden sm:inline">Download PDF</span>
+          </Button>
         </div>
       </nav>
 
-      {/* Main Content */}
+      {/* Main */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Editor Panel */}
+        {/* Editor */}
         <div
-          className={`w-full shrink-0 border-r border-gray-200/80 bg-white sm:w-[420px] ${
+          className={`w-full shrink-0 border-r border-neutral-200 sm:w-[400px] ${
             mobileView === "preview" ? "hidden sm:block" : ""
           }`}
         >
           <ScrollArea className="h-full">
-            <div className="p-5">
+            <div className="p-4">
               <Tabs defaultValue="basics" className="w-full">
-                <TabsList className="mb-5 grid w-full grid-cols-5 rounded-xl bg-gray-100/80 p-1">
-                  <TabsTrigger
-                    value="basics"
-                    className="rounded-lg text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
-                  >
-                    Basics
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="experience"
-                    className="rounded-lg text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
-                  >
-                    Work
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="education"
-                    className="rounded-lg text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
-                  >
-                    Edu
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="skills"
-                    className="rounded-lg text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
-                  >
-                    Skills
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="projects"
-                    className="rounded-lg text-xs data-[state=active]:bg-white data-[state=active]:shadow-sm"
-                  >
-                    Projects
-                  </TabsTrigger>
+                <TabsList className="mb-4 grid w-full grid-cols-5">
+                  <TabsTrigger value="basics" className="text-[11px]">Basics</TabsTrigger>
+                  <TabsTrigger value="experience" className="text-[11px]">Work</TabsTrigger>
+                  <TabsTrigger value="education" className="text-[11px]">Education</TabsTrigger>
+                  <TabsTrigger value="skills" className="text-[11px]">Skills</TabsTrigger>
+                  <TabsTrigger value="projects" className="text-[11px]">Projects</TabsTrigger>
                 </TabsList>
-                <TabsContent value="basics">
-                  <BasicsEditor />
-                </TabsContent>
-                <TabsContent value="experience">
-                  <ExperienceEditor />
-                </TabsContent>
-                <TabsContent value="education">
-                  <EducationEditor />
-                </TabsContent>
-                <TabsContent value="skills">
-                  <SkillsEditor />
-                </TabsContent>
-                <TabsContent value="projects">
-                  <ProjectsEditor />
-                </TabsContent>
+                <TabsContent value="basics"><BasicsEditor /></TabsContent>
+                <TabsContent value="experience"><ExperienceEditor /></TabsContent>
+                <TabsContent value="education"><EducationEditor /></TabsContent>
+                <TabsContent value="skills"><SkillsEditor /></TabsContent>
+                <TabsContent value="projects"><ProjectsEditor /></TabsContent>
               </Tabs>
             </div>
           </ScrollArea>
         </div>
 
-        {/* Preview Panel */}
+        {/* Preview */}
         <div
-          className={`flex-1 overflow-auto p-6 sm:p-8 ${
+          className={`flex-1 overflow-auto bg-neutral-100 p-6 sm:p-10 ${
             mobileView === "edit" ? "hidden sm:block" : ""
           }`}
-          style={{
-            background: "linear-gradient(135deg, #f0f0f5 0%, #e8e8f0 50%, #f0eff5 100%)",
-          }}
         >
           <div className="mx-auto max-w-[816px]">
             <div
               ref={previewRef}
-              className="rounded-xl shadow-2xl shadow-gray-400/20 ring-1 ring-gray-200/50 transition-shadow duration-300 hover:shadow-3xl"
+              className="rounded-sm bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08),0_8px_30px_rgba(0,0,0,0.06)]"
             >
               <TemplateRenderer
                 templateId={selectedTemplate}

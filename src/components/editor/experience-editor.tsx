@@ -85,7 +85,7 @@ export function ExperienceEditor() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-6 gap-1 px-2 text-xs text-blue-600"
+                  className="h-6 gap-1 px-2 text-xs text-neutral-600"
                   onClick={() => enhanceHighlights(exp.id, exp.highlights)}
                   disabled={enhancingId === exp.id}
                 >
@@ -174,7 +174,7 @@ export function ExperienceEditor() {
                   })
                 }
                 rows={4}
-                className="mt-1 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                className="mt-1 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-100"
               />
             </div>
           </div>
