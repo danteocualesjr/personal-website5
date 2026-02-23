@@ -25,6 +25,8 @@ import { TemplateId, TEMPLATES } from "@/types/resume";
 import { sampleResumeData } from "@/lib/sample-data";
 import { toast } from "sonner";
 
+const accent = "#E8503A";
+
 const ACCENT_COLORS = [
   "#171717",
   "#57534e",
@@ -36,7 +38,7 @@ const ACCENT_COLORS = [
   "#7c3aed",
   "#be185d",
   "#dc2626",
-  "#ea580c",
+  "#E8503A",
   "#ca8a04",
 ];
 
@@ -129,9 +131,10 @@ export default function EditorPage() {
                 }}
                 className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition-colors ${
                   selectedTemplate === t.id
-                    ? "bg-neutral-900 text-white"
+                    ? "text-white"
                     : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
                 }`}
+                style={selectedTemplate === t.id ? { backgroundColor: accent } : undefined}
               >
                 {t.name}
               </button>
@@ -177,9 +180,12 @@ export default function EditorPage() {
                         key={c}
                         onClick={() => { setAccentColor(c); setShowColors(false); }}
                         className={`flex h-6 w-6 items-center justify-center rounded-md transition-transform hover:scale-110 ${
-                          accentColor === c ? "ring-2 ring-neutral-900 ring-offset-1" : ""
+                          accentColor === c ? "ring-2 ring-offset-1" : ""
                         }`}
-                        style={{ backgroundColor: c }}
+                        style={{
+                          backgroundColor: c,
+                          ...(accentColor === c ? { ringColor: accent } : {}),
+                        }}
                       >
                         {accentColor === c && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
                       </button>
@@ -194,13 +200,15 @@ export default function EditorPage() {
           <div className="flex items-center rounded-md border border-neutral-200 sm:hidden">
             <button
               onClick={() => setMobileView("edit")}
-              className={`rounded-l-md px-2 py-1 ${mobileView === "edit" ? "bg-neutral-900 text-white" : "text-neutral-400"}`}
+              className={`rounded-l-md px-2 py-1 ${mobileView === "edit" ? "text-white" : "text-neutral-400"}`}
+              style={mobileView === "edit" ? { backgroundColor: accent } : undefined}
             >
               <PenLine className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={() => setMobileView("preview")}
-              className={`rounded-r-md px-2 py-1 ${mobileView === "preview" ? "bg-neutral-900 text-white" : "text-neutral-400"}`}
+              className={`rounded-r-md px-2 py-1 ${mobileView === "preview" ? "text-white" : "text-neutral-400"}`}
+              style={mobileView === "preview" ? { backgroundColor: accent } : undefined}
             >
               <Eye className="h-3.5 w-3.5" />
             </button>
@@ -209,7 +217,8 @@ export default function EditorPage() {
           {/* Download */}
           <Button
             size="sm"
-            className="h-7 gap-1.5 rounded-md text-[12px]"
+            className="h-7 gap-1.5 rounded-md text-[12px] font-medium text-white hover:opacity-90"
+            style={{ backgroundColor: accent }}
             onClick={handleDownload}
             disabled={isDownloading}
           >

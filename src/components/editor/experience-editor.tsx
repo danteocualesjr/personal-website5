@@ -85,7 +85,7 @@ export function ExperienceEditor() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-6 gap-1 px-2 text-xs text-neutral-600"
+                  className="h-6 gap-1 px-2 text-xs text-[#E8503A]"
                   onClick={() => enhanceHighlights(exp.id, exp.highlights)}
                   disabled={enhancingId === exp.id}
                 >

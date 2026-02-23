@@ -14,6 +14,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useResumeStore } from "@/store/resume-store";
 
+const accent = "#E8503A";
+
 export default function CreatePage() {
   const router = useRouter();
   const { setResumeData, isParsing, setIsParsing, parseError, setParseError } =
@@ -123,21 +125,22 @@ export default function CreatePage() {
         {/* Upload Zone */}
         <div
           {...getRootProps()}
-          className={`mt-10 flex cursor-pointer flex-col items-center rounded-lg border-2 border-dashed px-6 py-14 text-center transition-colors ${
+          className={`mt-10 flex cursor-pointer flex-col items-center rounded-lg border-2 border-dashed px-6 py-14 text-center transition-all duration-200 ${
             isDragActive
-              ? "border-neutral-900 bg-neutral-50"
+              ? "bg-red-50/50"
               : isParsing
                 ? "cursor-wait border-neutral-200 bg-neutral-50"
                 : uploadSuccess
                   ? "border-emerald-600 bg-emerald-50"
                   : "border-neutral-300 hover:border-neutral-400 hover:bg-neutral-50"
           }`}
+          style={isDragActive ? { borderColor: accent } : undefined}
         >
           <input {...getInputProps()} />
 
           {isParsing ? (
             <>
-              <Loader2 className="h-8 w-8 animate-spin text-neutral-400" />
+              <Loader2 className="h-8 w-8 animate-spin" style={{ color: accent }} />
               <p className="mt-4 text-[15px] font-medium text-neutral-900">
                 Parsing {fileName}...
               </p>
@@ -184,7 +187,8 @@ export default function CreatePage() {
         </div>
         <div className="mt-4 text-center">
           <button
-            className="text-[13px] font-medium text-neutral-900 underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900 transition-colors"
+            className="text-[13px] font-medium underline underline-offset-4 decoration-neutral-300 transition-colors hover:decoration-neutral-900"
+            style={{ color: accent }}
             onClick={handleDemoData}
             disabled={isParsing}
           >
@@ -198,30 +202,22 @@ export default function CreatePage() {
             How to get your LinkedIn PDF
           </h3>
           <ol className="mt-4 space-y-3 text-[14px] leading-relaxed text-neutral-600">
-            <li className="flex gap-3">
-              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-500">
-                1
-              </span>
-              Go to your LinkedIn profile
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-500">
-                2
-              </span>
-              Click <strong>More</strong> below your profile photo
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-500">
-                3
-              </span>
-              Select <strong>Save to PDF</strong>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-500">
-                4
-              </span>
-              Upload the downloaded file above
-            </li>
+            {[
+              "Go to your LinkedIn profile",
+              <>Click <strong>More</strong> below your profile photo</>,
+              <>Select <strong>Save to PDF</strong></>,
+              "Upload the downloaded file above",
+            ].map((text, i) => (
+              <li key={i} className="flex gap-3">
+                <span
+                  className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                  style={{ backgroundColor: accent }}
+                >
+                  {i + 1}
+                </span>
+                {text}
+              </li>
+            ))}
           </ol>
         </div>
       </div>

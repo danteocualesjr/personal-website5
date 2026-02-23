@@ -61,7 +61,7 @@ export function BasicsEditor() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-6 gap-1 px-2 text-xs text-neutral-600 hover:text-neutral-900"
+                className="h-6 gap-1 px-2 text-xs text-[#E8503A] hover:text-[#d4442e]"
                 onClick={() =>
                   enhanceField(key, basics[key as keyof typeof basics])
                 }

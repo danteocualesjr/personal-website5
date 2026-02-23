@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Resumaker - LinkedIn to Resume in Seconds",
+  title: "Resumake - LinkedIn to Resume in Seconds",
   description:
     "Upload your LinkedIn profile PDF and instantly generate beautiful, ATS-friendly resumes in multiple styles. Edit, customize, and download as PDF.",
 };

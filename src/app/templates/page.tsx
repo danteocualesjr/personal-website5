@@ -10,6 +10,8 @@ import { TemplateRenderer } from "@/components/resume";
 import { TEMPLATES, TemplateId } from "@/types/resume";
 import { sampleResumeData } from "@/lib/sample-data";
 
+const accent = "#E8503A";
+
 export default function TemplatesPage() {
   const router = useRouter();
   const { resumeData, selectedTemplate, setSelectedTemplate, setResumeData } =
@@ -52,7 +54,8 @@ export default function TemplatesPage() {
           <Button
             onClick={handleContinue}
             size="sm"
-            className="rounded-full"
+            className="rounded-full text-[13px] font-medium text-white hover:opacity-90"
+            style={{ backgroundColor: accent }}
           >
             Continue
             <ArrowRight className="ml-1 h-3.5 w-3.5" />
@@ -75,11 +78,12 @@ export default function TemplatesPage() {
               <button
                 key={template.id}
                 onClick={() => handleSelect(template.id)}
-                className={`group relative overflow-hidden rounded-lg border-2 text-left transition-all ${
+                className={`group relative overflow-hidden rounded-lg border-2 text-left transition-all duration-200 ${
                   isSelected
-                    ? "border-neutral-900"
+                    ? "shadow-lg"
                     : "border-neutral-200 hover:border-neutral-400"
                 }`}
+                style={isSelected ? { borderColor: accent } : undefined}
               >
                 {/* Preview */}
                 <div className="overflow-hidden border-b border-neutral-100 bg-neutral-50">
@@ -103,11 +107,12 @@ export default function TemplatesPage() {
                     </p>
                   </div>
                   <div
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors"
+                    style={
                       isSelected
-                        ? "border-neutral-900 bg-neutral-900"
-                        : "border-neutral-300 group-hover:border-neutral-400"
-                    }`}
+                        ? { borderColor: accent, backgroundColor: accent }
+                        : { borderColor: "#d4d4d4" }
+                    }
                   >
                     {isSelected && (
                       <svg
