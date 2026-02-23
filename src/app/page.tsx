@@ -68,60 +68,96 @@ export default function LandingPage() {
           {/* Resume mockup */}
           <div className="relative hidden lg:block">
             <div className="absolute -inset-4 rounded-2xl bg-neutral-800/50" />
-            <div className="relative rounded-lg bg-white p-8 shadow-2xl">
-              {/* Accent bar */}
-              <div className="mb-6 h-1 w-16 rounded-full" style={{ backgroundColor: accent }} />
-              {/* Name */}
-              <div className="h-5 w-44 rounded bg-neutral-900" />
-              <div className="mt-2 h-3 w-28 rounded" style={{ backgroundColor: `${accent}30` }} />
-              {/* Contact row */}
-              <div className="mt-4 flex gap-4">
-                <div className="h-2 w-24 rounded bg-neutral-200" />
-                <div className="h-2 w-20 rounded bg-neutral-200" />
-                <div className="h-2 w-16 rounded bg-neutral-200" />
-              </div>
-              {/* Summary */}
-              <div className="mt-6 space-y-2">
-                <div className="h-2 w-full rounded bg-neutral-100" />
-                <div className="h-2 w-5/6 rounded bg-neutral-100" />
-                <div className="h-2 w-4/6 rounded bg-neutral-100" />
-              </div>
-              {/* Section */}
-              <div className="mt-7 flex gap-8">
-                <div className="flex-1">
-                  <div className="mb-3 h-2.5 w-20 rounded" style={{ backgroundColor: `${accent}25` }} />
-                  <div className="space-y-4">
-                    {[1, 2].map((i) => (
-                      <div key={i}>
-                        <div className="h-3 w-36 rounded bg-neutral-800" />
-                        <div className="mt-1.5 h-2 w-24 rounded bg-neutral-300" />
-                        <div className="mt-2.5 space-y-1.5">
-                          <div className="flex items-start gap-2">
-                            <div className="mt-1 h-1 w-1 shrink-0 rounded-full" style={{ backgroundColor: accent }} />
-                            <div className="h-2 w-full rounded bg-neutral-100" />
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <div className="mt-1 h-1 w-1 shrink-0 rounded-full" style={{ backgroundColor: accent }} />
-                            <div className="h-2 w-5/6 rounded bg-neutral-100" />
-                          </div>
-                        </div>
+            <div className="relative overflow-hidden rounded-lg bg-white shadow-2xl" style={{ fontSize: "10px", lineHeight: "1.5" }}>
+              {/* Accent top bar */}
+              <div className="h-1" style={{ backgroundColor: accent }} />
+              <div className="px-7 pt-6 pb-7">
+                {/* Header */}
+                <h3 className="text-[18px] font-bold tracking-tight text-neutral-900" style={{ lineHeight: "1.2" }}>
+                  Sarah Chen
+                </h3>
+                <p className="mt-0.5 text-[11px] font-medium" style={{ color: accent }}>
+                  Senior Product Designer
+                </p>
+                <p className="mt-2 text-[9px] text-neutral-400">
+                  san francisco, ca &nbsp;&middot;&nbsp; sarah@email.com &nbsp;&middot;&nbsp; linkedin.com/in/sarachen
+                </p>
+
+                {/* Summary */}
+                <p className="mt-4 text-neutral-500" style={{ fontSize: "8.5px", lineHeight: "1.6" }}>
+                  Product designer with 8+ years of experience shipping user-facing products at scale. Led design for features reaching 20M+ users. Strong in systems thinking, prototyping, and cross-functional collaboration.
+                </p>
+
+                <div className="mt-5 flex gap-6">
+                  {/* Left column */}
+                  <div className="flex-1">
+                    {/* Experience */}
+                    <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: accent }}>
+                      Experience
+                    </p>
+                    <div className="mt-2.5 h-px bg-neutral-100" />
+
+                    <div className="mt-2.5">
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-[9.5px] font-bold text-neutral-900">Senior Product Designer</p>
+                        <p className="text-[8px] text-neutral-400">2021 &ndash; Present</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="w-28 shrink-0 space-y-5">
-                  <div>
-                    <div className="mb-2 h-2 w-14 rounded" style={{ backgroundColor: `${accent}25` }} />
-                    <div className="space-y-1.5">
-                      <div className="h-2 w-full rounded bg-neutral-100" />
-                      <div className="h-2 w-4/5 rounded bg-neutral-100" />
+                      <p className="text-[8.5px] font-medium text-neutral-500">Stripe &middot; San Francisco</p>
+                      <ul className="mt-1.5 space-y-1 text-neutral-600" style={{ fontSize: "8px", lineHeight: "1.55" }}>
+                        <li className="flex gap-1.5">
+                          <span className="mt-[5px] h-[3px] w-[3px] shrink-0 rounded-full" style={{ backgroundColor: accent }} />
+                          <span>Redesigned the merchant onboarding flow, reducing drop-off by 34% and saving $2.8M annually</span>
+                        </li>
+                        <li className="flex gap-1.5">
+                          <span className="mt-[5px] h-[3px] w-[3px] shrink-0 rounded-full" style={{ backgroundColor: accent }} />
+                          <span>Led a 4-person design team on Stripe&apos;s new Dashboard experience for 3M+ businesses</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="mt-3">
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-[9.5px] font-bold text-neutral-900">Product Designer</p>
+                        <p className="text-[8px] text-neutral-400">2018 &ndash; 2021</p>
+                      </div>
+                      <p className="text-[8.5px] font-medium text-neutral-500">Figma &middot; San Francisco</p>
+                      <ul className="mt-1.5 space-y-1 text-neutral-600" style={{ fontSize: "8px", lineHeight: "1.55" }}>
+                        <li className="flex gap-1.5">
+                          <span className="mt-[5px] h-[3px] w-[3px] shrink-0 rounded-full" style={{ backgroundColor: accent }} />
+                          <span>Designed the auto-layout feature used by 5M+ designers, from concept to launch</span>
+                        </li>
+                        <li className="flex gap-1.5">
+                          <span className="mt-[5px] h-[3px] w-[3px] shrink-0 rounded-full" style={{ backgroundColor: accent }} />
+                          <span>Built and maintained the component library and internal design system</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
-                  <div>
-                    <div className="mb-2 h-2 w-10 rounded" style={{ backgroundColor: `${accent}25` }} />
-                    <div className="flex flex-wrap gap-1">
-                      {[20, 14, 22, 16, 18].map((w, i) => (
-                        <div key={i} className="h-3 rounded bg-neutral-50 ring-1 ring-neutral-100" style={{ width: w * 3 }} />
+
+                  {/* Right column */}
+                  <div className="w-[130px] shrink-0">
+                    <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: accent }}>
+                      Education
+                    </p>
+                    <div className="mt-2.5 h-px bg-neutral-100" />
+                    <div className="mt-2.5">
+                      <p className="text-[9px] font-bold text-neutral-900">Stanford University</p>
+                      <p className="text-[8px] text-neutral-500">MS, HCI &middot; 2018</p>
+                    </div>
+                    <div className="mt-2">
+                      <p className="text-[9px] font-bold text-neutral-900">UC Berkeley</p>
+                      <p className="text-[8px] text-neutral-500">BA, Cognitive Sci &middot; 2016</p>
+                    </div>
+
+                    <p className="mt-4 text-[9px] font-bold uppercase tracking-widest" style={{ color: accent }}>
+                      Skills
+                    </p>
+                    <div className="mt-2.5 h-px bg-neutral-100" />
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {["Figma", "Prototyping", "Design Systems", "User Research", "React", "CSS"].map((s) => (
+                        <span key={s} className="rounded bg-neutral-100 px-1.5 py-0.5 text-[7.5px] font-medium text-neutral-600">
+                          {s}
+                        </span>
                       ))}
                     </div>
                   </div>
