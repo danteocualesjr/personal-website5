@@ -62,7 +62,7 @@ export interface ResumeData {
   projects: ResumeProject[];
 }
 
-export type TemplateId = "modern" | "classic" | "minimal" | "bold" | "executive";
+export type TemplateId = "modern" | "classic" | "minimal" | "bold" | "executive" | "compact" | "creative" | "timeline";
 
 export interface TemplateConfig {
   id: TemplateId;
@@ -101,5 +101,23 @@ export const TEMPLATES: TemplateConfig[] = [
     name: "Executive",
     description: "Sophisticated, muted tones, suited for senior roles",
     accentColor: "#6b5b47",
+  },
+  {
+    id: "compact",
+    name: "Compact",
+    description: "Dense two-column, fits more content on one page",
+    accentColor: "#0f766e",
+  },
+  {
+    id: "creative",
+    name: "Creative",
+    description: "Colored sidebar, great for design and marketing roles",
+    accentColor: "#7c3aed",
+  },
+  {
+    id: "timeline",
+    name: "Timeline",
+    description: "Vertical timeline rail, clear career progression",
+    accentColor: "#0369a1",
   },
 ];

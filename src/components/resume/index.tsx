@@ -4,6 +4,9 @@ import { ClassicTemplate } from "./classic-template";
 import { MinimalTemplate } from "./minimal-template";
 import { BoldTemplate } from "./bold-template";
 import { ExecutiveTemplate } from "./executive-template";
+import { CompactTemplate } from "./compact-template";
+import { CreativeTemplate } from "./creative-template";
+import { TimelineTemplate } from "./timeline-template";
 
 interface TemplateRendererProps {
   templateId: TemplateId;
@@ -23,6 +26,12 @@ export function TemplateRenderer({ templateId, data, accentColor }: TemplateRend
       return <BoldTemplate data={data} accentColor={accentColor} />;
     case "executive":
       return <ExecutiveTemplate data={data} accentColor={accentColor} />;
+    case "compact":
+      return <CompactTemplate data={data} accentColor={accentColor} />;
+    case "creative":
+      return <CreativeTemplate data={data} accentColor={accentColor} />;
+    case "timeline":
+      return <TimelineTemplate data={data} accentColor={accentColor} />;
     default:
       return <ModernTemplate data={data} accentColor={accentColor} />;
   }
@@ -33,3 +42,6 @@ export { ClassicTemplate } from "./classic-template";
 export { MinimalTemplate } from "./minimal-template";
 export { BoldTemplate } from "./bold-template";
 export { ExecutiveTemplate } from "./executive-template";
+export { CompactTemplate } from "./compact-template";
+export { CreativeTemplate } from "./creative-template";
+export { TimelineTemplate } from "./timeline-template";
