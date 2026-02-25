@@ -49,9 +49,9 @@ function ModernPDF({ data, color }: { data: ResumeData; color: string }) {
     <Document>
       <Page size="LETTER" style={[baseStyles.page, { padding: 0 }]}>
         {/* Header */}
-        <View style={{ paddingHorizontal: 36, paddingTop: 30, paddingBottom: 18, borderBottomWidth: 2, borderBottomColor: color }}>
+        <View style={{ paddingHorizontal: 36, paddingTop: 26, paddingBottom: 12, borderBottomWidth: 2, borderBottomColor: color }}>
           <Text style={{ fontSize: 22, fontWeight: 700, color: "#111827" }}>{data.basics.name}</Text>
-          <Text style={{ fontSize: 11, fontWeight: 600, color, marginTop: 2 }}>{data.basics.headline}</Text>
+          <Text style={{ fontSize: 10, fontWeight: 600, color, marginTop: 3, lineHeight: 1.5 }}>{data.basics.headline}</Text>
           <View style={[baseStyles.contactRow, { marginTop: 6 }]}>
             {data.basics.email && <Text>{data.basics.email}</Text>}
             {data.basics.phone && <Text>{data.basics.phone}</Text>}
@@ -60,16 +60,16 @@ function ModernPDF({ data, color }: { data: ResumeData; color: string }) {
           </View>
         </View>
 
-        <View style={{ flexDirection: "row", paddingHorizontal: 36, paddingTop: 16, gap: 24 }}>
+        <View wrap style={{ flexDirection: "row", paddingHorizontal: 36, paddingTop: 12, paddingBottom: 30, gap: 24 }}>
           {/* Main Col */}
-          <View style={{ flex: 1 }}>
-            {data.basics.summary && <Text style={{ color: "#6b7280", marginBottom: 12 }}>{data.basics.summary}</Text>}
+          <View wrap style={{ flex: 1 }}>
+            {data.basics.summary && <Text style={{ color: "#6b7280", marginBottom: 6 }}>{data.basics.summary}</Text>}
 
             {data.experience.length > 0 && (
-              <View style={{ marginBottom: 12 }}>
-                <Text style={[baseStyles.sectionTitle, { color }]}>Experience</Text>
+              <View style={{ marginBottom: 6 }}>
+                <Text minPresenceAhead={30} style={[baseStyles.sectionTitle, { color }]}>Experience</Text>
                 {data.experience.map((exp) => (
-                  <View key={exp.id} style={{ marginBottom: 8 }}>
+                  <View key={exp.id} wrap={false} style={{ marginBottom: 4 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                       <Text style={baseStyles.h3}>{exp.position}</Text>
                       <Text style={baseStyles.small}>{exp.startDate} — {exp.endDate}</Text>
@@ -88,9 +88,9 @@ function ModernPDF({ data, color }: { data: ResumeData; color: string }) {
 
             {data.projects.length > 0 && (
               <View>
-                <Text style={[baseStyles.sectionTitle, { color }]}>Projects</Text>
+                <Text minPresenceAhead={30} style={[baseStyles.sectionTitle, { color }]}>Projects</Text>
                 {data.projects.map((proj) => (
-                  <View key={proj.id} style={{ marginBottom: 6 }}>
+                  <View key={proj.id} wrap={false} style={{ marginBottom: 4 }}>
                     <Text style={baseStyles.h3}>{proj.name}</Text>
                     <Text style={{ color: "#6b7280" }}>{proj.description}</Text>
                   </View>
@@ -100,7 +100,7 @@ function ModernPDF({ data, color }: { data: ResumeData; color: string }) {
           </View>
 
           {/* Sidebar */}
-          <View style={{ width: 150 }}>
+          <View wrap={false} style={{ width: 150 }}>
             {data.education.length > 0 && (
               <View style={{ marginBottom: 12 }}>
                 <Text style={[baseStyles.sectionTitle, { color }]}>Education</Text>
